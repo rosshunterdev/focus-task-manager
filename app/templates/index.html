@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task Manager</title>
+    </head>
+    <body>
+        <h1>Tasks</h1>
+        {% if tasks %} # if tasks variable from routes.py (which runs Task.query.all()) exists, then run the following
+            <ul>
+                {% for task in tasks %}
+                    <li>{{ task.title}}</li>
+                {% endfor %}
+
+            </ul>
+        {% else %}
+            <p>No tasks yet.</p>
+        {% endif %}
+    </body>
+</html>
