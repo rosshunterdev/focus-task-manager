@@ -5,7 +5,8 @@
     </head>
     <body>
         <h1>Tasks</h1>
-        {% if tasks %} # if tasks variable from routes.py (which runs Task.query.all()) exists, then run the following
+        {% if tasks %} 
+        {# if tasks variable from routes.py (which runs Task.query.all()) exists, then run the following#}
             <ul>
                 {% for task in tasks %}
                     <li>{{ task.title}}</li>
@@ -15,5 +16,7 @@
         {% else %}
             <p>No tasks yet.</p>
         {% endif %}
+
+        <a href="{{ url_for('main.create_task') }}">Add Task</a>
     </body>
 </html>

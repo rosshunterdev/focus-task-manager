@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add a new task</title>
+    </head>
+    <body>
+        <form method="POST">
+
+            <input type="text" name="title">
+
+            <select name="status">
+                <option value="Yet-to-do">Yet-to-do</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+
+            <select name="priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+
+            <textarea name="notes"></textarea>
+
+            <button>
+                Submit
+            </button>
+        </form>
+    </body>
+</html>
