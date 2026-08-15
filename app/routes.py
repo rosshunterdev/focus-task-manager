@@ -38,3 +38,30 @@ def create_task():
     
     else:
         return render_template('create_task.html')
+
+
+@main.route('/tasks/<int:task_id>/update', methods=['POST'])
+def update_task(task_id):
+    task_to_update = Task.query.get_or_404(task_id)
+    task_to_update.title = request.form['title']
+    task_to_update.status = request.form['status']
+    task_to_update.priority = request.form['priority']
+    task_to_update.notes = request.form['notes']
+    # edit task function?
+    db.session.commit()
+    return redirect(url_for('main.index')) # this redirects to the main dashboard
+    # redirecting after POST stops the browser from resubmitting the same POST if someone hits refresh
+
+@main.route('/tasks/<int:task_id>/delete', methods=['POST'])
+def delete_task(task_id):
+    task_to_delete = Task.query.get_or_404(task_id)
+    db.session.delete(task_to_delete)
+    db.session.commit()
+    return redirect(url_for('main.index'))
+
+
+@main.route('/tasks/<int:task_id>/edit')
+def edit_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    return render_template('edit_task.html', task=task)
+
