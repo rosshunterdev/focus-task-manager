@@ -1,20 +1,33 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Task Manager</title>
-    </head>
-    <body>
-        <h1>Tasks</h1>
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="panel">
+        
+        <h1 class="page-title">Tasks</h1>
         {% if tasks %} 
         {# if tasks variable from routes.py (which runs Task.query.all()) exists, then run the following#}
             <ul>
                 {% for task in tasks %}
-                    <li>{{ task.title}}</li>
+                    <li class="task-row">
+                        <div class="task-main">
+                            <div class="task-title">{{ task.title }}</div>
+                            <div class="task-notes">{{ task.notes or '' }}</div>
+                        </div>
+                        <span class="badge {% if task.priority == 'High' %}badge-high{% elif task.priority == 'Medium' %}badge-med{% else %}badge-low{% endif %}">{{ task.priority }}</span>
+                        <span class="task-date">{{ task.date }}</span>
+                        <form method="POST" action="{{ url_for('main.update_task', task_id=task.id) }}" style="display:inline">
+                            <select name="status" class="select" onchange="this.form.submit()">
+                                <option value="Yet-to-do" {% if task.status == 'Yet-to-do' %}selected{% endif %}>Yet-to-do</option>
+                                <option value="On-going" {% if task.status == 'On-going' %}selected{% endif %}>On-going</option>
+                                <option value="Completed" {% if task.status == 'Completed' %}selected{% endif %}>Completed</option>
+                            </select>
+                        </form>
+                        <a class="btn-secondary" href="{{ url_for('main.edit_task', task_id=task.id) }}">Edit</a>
+                        <form method="POST" action="{{ url_for('main.delete_task', task_id=task.id) }}" style="display:inline">
+                            <button class="link-danger" type="submit">Delete</button>
+                        </form>
+                    </li>
 
-                    <a href="{{ url_for('main.edit_task', task_id=task.id) }}">Edit</a>
-                    <form method="POST" action="{{ url_for('main.delete_task', task_id=task.id) }}" style="display:inline">
-                        <button type="submit">Delete</button>
-                    </form>
                 {% endfor %}
 
             </ul>
@@ -23,5 +36,7 @@
         {% endif %}
 
         <a href="{{ url_for('main.create_task') }}">Add Task</a>
-    </body>
-</html>
+
+    </div>
+
+{% endblock %}

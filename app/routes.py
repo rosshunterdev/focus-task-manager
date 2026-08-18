@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from sqlalchemy import text
 from app import db
 from app.models import Task # added to import the Task class from models.py
+from datetime import date
 
 main = Blueprint('main', __name__)
 
@@ -27,8 +28,9 @@ def create_task():
         status = request.form['status']
         priority = request.form['priority']
         notes = request.form['notes']
+        task_date = date.fromisoformat(request.form['date'])
 
-        new_task = Task(title=title, status=status, priority=priority, notes=notes)
+        new_task = Task(title=title, status=status, priority=priority, notes=notes, date=task_date)
             #creates a python object
         db.session.add(new_task)
             #stages
@@ -43,11 +45,13 @@ def create_task():
 @main.route('/tasks/<int:task_id>/update', methods=['POST'])
 def update_task(task_id):
     task_to_update = Task.query.get_or_404(task_id)
-    task_to_update.title = request.form['title']
-    task_to_update.status = request.form['status']
-    task_to_update.priority = request.form['priority']
-    task_to_update.notes = request.form['notes']
-    # edit task function?
+    task_to_update.title = request.form.get('title', task_to_update.title)
+    task_to_update.status = request.form.get('status', task_to_update.status)
+    task_to_update.priority = request.form.get('priority', task_to_update.priority)
+    task_to_update.notes = request.form.get('notes', task_to_update.notes)
+    new_date = request.form.get('date')
+    if new_date:
+        task_to_update.date = date.fromisoformat(new_date)
     db.session.commit()
     return redirect(url_for('main.index')) # this redirects to the main dashboard
     # redirecting after POST stops the browser from resubmitting the same POST if someone hits refresh

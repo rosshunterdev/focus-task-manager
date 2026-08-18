@@ -1,30 +1,58 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Edit task</title>
-    </head>
-    <body>
+{% extends "base.html" %}
+
+{% block title %}Edit task{% endblock %}
+
+{% block content %}
+<div style="max-width: 520px; margin: 60px auto; padding: 0 20px;">
+    <div class="panel">
+        <h1 class="panel-heading">Edit Task</h1>
+
         <form method="POST" action="{{ url_for('main.update_task', task_id=task.id)}}">
 
-            <input type="text" name="title" value="{{ task.title }}">
+            <div class="field">
+                <label class="field-label" for="title">Title</label>
+                <input class="input" type="text" id="title" name="title" value="{{ task.title }}">
+            </div>
 
-            <select name="status">
-                <option value="Yet-to-do" {% if task.status == 'Yet-to-do' %}selected{% endif %}>Yet-to-do</option>
-                <option value="In Progress" {% if task.status == 'In Progress' %}selected{% endif %}>In Progress</option>
-                <option value="Completed" {% if task.status == 'Completed' %}selected{% endif %}>Completed</option>
-            </select>
+            <div class="field">
+                <label class="field-label" for="status">Status</label>
+                <div class="select-wrap">
+                    <select class="select" id="status" name="status">
+                        <option value="Yet-to-do" {% if task.status == 'Yet-to-do' %}selected{% endif %}>Yet-to-do</option>
+                        <option value="On-going" {% if task.status == 'On-going' %}selected{% endif %}>On-going</option>
+                        <option value="Completed" {% if task.status == 'Completed' %}selected{% endif %}>Completed</option>
+                    </select>
+                    <span class="select-caret">&#9662;</span>
+                </div>
+            </div>
 
-            <select name="priority">
-                <option value="Low" {% if task.priority == 'Low' %}selected{% endif %}>Low</option>
-                <option value="Medium" {% if task.priority == 'Medium' %}selected{% endif %}>Medium</option>
-                <option value="High" {% if task.priority == 'High' %}selected{% endif %}>High</option>
-            </select>
+            <div class="field">
+                <label class="field-label" for="priority">Priority</label>
+                <div class="select-wrap">
+                    <select class="select" id="priority" name="priority">
+                        <option value="Low" {% if task.priority == 'Low' %}selected{% endif %}>Low</option>
+                        <option value="Medium" {% if task.priority == 'Medium' %}selected{% endif %}>Medium</option>
+                        <option value="High" {% if task.priority == 'High' %}selected{% endif %}>High</option>
+                    </select>
+                    <span class="select-caret">&#9662;</span>
+                </div>
+            </div>
 
-            <textarea name="notes">{{ task.notes }}</textarea>
+            <div class="field">
+                <label class="field-label" for="date">Date</label>
+                <input class="input-date" type="date" id="date" name="date" value="{{ task.date }}">
+            </div>
 
-            <button>
-                Submit
-            </button>
+            <div class="field">
+                <label class="field-label" for="notes">Notes</label>
+                <textarea class="textarea" id="notes" name="notes">{{ task.notes }}</textarea>
+            </div>
+
+            <div class="panel-footer">
+                <a class="btn btn-secondary" href="{{ url_for('main.index') }}">Cancel</a>
+                <button class="btn btn-primary" type="submit">Save Task</button>
+            </div>
         </form>
-    </body>
-</html>
+    </div>
+</div>
+{% endblock %}

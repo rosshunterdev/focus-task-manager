@@ -1,30 +1,61 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Add a new task</title>
-    </head>
-    <body>
+{% extends "base.html" %}
+
+{% block title %}Add a new task{% endblock %}
+
+{% block content %}
+<div style="max-width: 520px; margin: 60px auto; padding: 0 20px;">
+    <div class="panel">
+        <h1 class="panel-heading">New Task</h1>
+
         <form method="POST">
 
-            <input type="text" name="title">
+            <div class="field">
+                <label class="field-label" for="title">Title</label>
+                <input class="input" type="text" id="title" name="title" placeholder="What needs doing?">
+            </div>
 
-            <select name="status">
-                <option value="Yet-to-do">Yet-to-do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-            </select>
+            <div class="field">
+                <label class="field-label" for="status">Status</label>
+                <div class="select-wrap">
+                    <select class="select" id="status" name="status">
+                        <option value="Yet-to-do">Yet-to-do</option>
+                        <option value="On-going">On-going</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    <span class="select-caret">&#9662;</span>
+                </div>
+            </div>
 
-            <select name="priority">
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-            </select>
+            <div class="field">
+                <label class="field-label" for="priority">Priority</label>
+                <div class="select-wrap">
+                    <select class="select" id="priority" name="priority">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                    <span class="select-caret">&#9662;</span>
+                </div>
+            </div>
 
-            <textarea name="notes"></textarea>
+            <div class="field">
+                <label class="field-label" for="date">Date</label>
+                <input class="input-date" type="date" id="date" name="date">
+            </div>
 
-            <button>
-                Submit
-            </button>
+
+            <div class="field">
+                <label class="field-label" for="notes">Notes</label>
+                <textarea class="textarea" id="notes" name="notes" placeholder="Optional detail"></textarea>
+            </div>
+
+            <div class="panel-footer">
+                <a class="btn btn-secondary" href="{{ url_for('main.index') }}">Cancel</a>
+                <button class="btn btn-primary" type="submit">Save Task</button>
+            </div>
+
+
         </form>
-    </body>
-</html>
+    </div>
+</div>
+{% endblock %}
