@@ -1,6 +1,7 @@
 from datetime import date
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,7 +17,7 @@ class Task(db.Model):
         return f'<Task {self.id}: {self.title}>' 
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, nullable=False, unique=True)
     password_hash = db.Column(db.String, nullable=False)
