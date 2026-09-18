@@ -13,3 +13,6 @@ instance/
 # IDE
 .vscode/
 .idea/
+
+# Coursework deliverables (not for the git history)
+docs/
