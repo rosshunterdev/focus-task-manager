@@ -22,8 +22,9 @@
                                 <option value="Completed" {% if task.status == 'Completed' %}selected{% endif %}>Completed</option>
                             </select>
                         </form>
-                        <a class="btn-secondary" href="{{ url_for('main.edit_task', task_id=task.id) }}">Edit</a>
+                        <a class="btn-secondary" href="{{ url_for('main.edit_task', task_id=task.id, next=request.path) }}">Edit</a>
                         <form method="POST" action="{{ url_for('main.delete_task', task_id=task.id) }}" style="display:inline">
+                            <input type="hidden" name="next" value="{{ request.path  }}">
                             <button class="link-danger" type="submit">Delete</button>
                         </form>
                     </li>

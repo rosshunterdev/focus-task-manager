@@ -8,6 +8,7 @@
         <h1 class="panel-heading">Edit Task</h1>
 
         <form method="POST" action="{{ url_for('main.update_task', task_id=task.id)}}">
+            <input type="hidden" name="next" value="{{ next_url }}">
 
             <div class="field">
                 <label class="field-label" for="title">Title</label>
