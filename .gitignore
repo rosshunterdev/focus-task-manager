@@ -16,3 +16,8 @@ instance/
 
 # Coursework deliverables (not for the git history)
 docs/
+
+# Private study/session notes
+notes.md
+notes/
+204B-PROJECT-GUIDE.md
