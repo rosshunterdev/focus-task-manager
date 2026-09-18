@@ -24,6 +24,15 @@ def index():
         # left tasks is variable name for Jinja to see. right tasks is the actual list of Task objects 
         # (also the python variable from the line above)
 
+@main.route('/dashboard')
+@login_required
+def dashboard():
+    tasks = Task.query.filter_by(user_id=current_user.id, date=date.today()).all()
+
+    return render_template('dashboard.html', tasks=tasks)
+
+    return render_template(...)
+
 @main.route('/tasks/new', methods=['GET', 'POST'])
 @login_required
 def create_task():
@@ -59,7 +68,8 @@ def update_task(task_id):
     if new_date:
         task_to_update.date = date.fromisoformat(new_date)
     db.session.commit()
-    return redirect(url_for('main.index')) # this redirects to the main dashboard
+    next_url = request.form.get('next')
+    return redirect(next_url) if next_url else redirect(url_for('main.index'))
     # redirecting after POST stops the browser from resubmitting the same POST if someone hits refresh
 
 @main.route('/tasks/<int:task_id>/delete', methods=['POST'])
@@ -68,14 +78,17 @@ def delete_task(task_id):
     task_to_delete = Task.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
     db.session.delete(task_to_delete)
     db.session.commit()
-    return redirect(url_for('main.index'))
+    next_url = request.form.get('next')
+    return redirect(next_url) if next_url else redirect(url_for('main.index'))
+
 
 
 @main.route('/tasks/<int:task_id>/edit')
 @login_required
 def edit_task(task_id):
     task = Task.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
-    return render_template('edit_task.html', task=task)
+    next_url = request.args.get('next')
+    return render_template('edit_task.html', task=task, next_url=next_url)
 
 
 @main.route('/register', methods=['GET', 'POST'])

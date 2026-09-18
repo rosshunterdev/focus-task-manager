@@ -14,8 +14,7 @@
             <div class="navrow">
                 <div class="navlinks">
 
-
-                    <a class="navlink" href="#">Dashboard</a>
+                    <a class="navlink {% if request.endpoint == 'main.dashboard' %}is-active{% endif %}" href="{{ url_for('main.dashboard') }}">Dashboard</a>
 
                     <a class="navlink {% if request.endpoint == 'main.index' %}is-active{% endif %}" href="{{ url_for('main.index') }}">All Tasks</a>
 
