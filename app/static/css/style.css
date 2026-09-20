@@ -191,6 +191,12 @@ body {
   background: #E5DDD1;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
 .avatar {
   width: 38px;
   height: 38px;
@@ -306,6 +312,7 @@ body {
   border-radius: 999px;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-primary {
