@@ -36,14 +36,6 @@
             <p>No tasks yet.</p>
         {% endif %}
 
-        <a href="{{ url_for('main.create_task') }}">Add Task</a>
-
-        <div class="user-section">
-            {{ current_user.email }}
-            <form method="POST" action="{{ url_for('main.logout') }}" style="display:inline">
-                <button class="btn-secondary" type="submit">Logout</button>
-            </form>
-        </div>
 
     </div>
 

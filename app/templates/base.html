@@ -18,11 +18,26 @@
 
                     <a class="navlink {% if request.endpoint == 'main.index' %}is-active{% endif %}" href="{{ url_for('main.index') }}">All Tasks</a>
 
-
-
                     <span class="navlink is-disabled">Calendar</span>
+
                 </div>
-                <div class="avatar">JS</div>
+                {% if current_user.is_authenticated %}
+                <div class="nav-actions">
+                    <a class="btn btn-primary"
+                    href="{{ url_for('main.create_task') }}">
+                    Add Task
+                </a>
+                    <div class="avatar">{{ current_user.email[0] |upper }}</div>
+                
+
+                <form method="POST" action="{{ url_for('main.logout') }}">
+                    <button class="btn btn-secondary" type="submit">Log Out</button>
+                </form>
+
+                </div>
+
+                {% endif %}
+
             </div>
             <div class="nav-rule"></div>
 

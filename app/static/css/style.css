@@ -187,8 +187,15 @@ body {
 
 .nav-rule {
   margin-top: 22px;
+  margin-bottom: 24px;
   height: 1px;
   background: #E5DDD1;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .avatar {
@@ -306,6 +313,7 @@ body {
   border-radius: 999px;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-primary {
