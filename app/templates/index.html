@@ -2,10 +2,9 @@
 
 {% block content %}
     <div class="panel">
-        
+
         <h1 class="page-title">Tasks</h1>
-        {% if tasks %} 
-        {# if tasks variable from routes.py (which runs Task.query.all()) exists, then run the following#}
+        {% if tasks %}
             <ul>
                 {% for task in tasks %}
                     <li class="task-row">

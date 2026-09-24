@@ -9,7 +9,7 @@ db = SQLAlchemy()
 clerk = Migrate()
 
 login_manager = LoginManager()
-login_manager.login_view = 'main.login' #send logged out users back to login view
+login_manager.login_view = 'main.login' # send logged-out users to the login page
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -22,15 +22,13 @@ def create_app(config_class=Config):
     from app import models
     app.register_blueprint(main)
 
-    # Initialize Flask-Login — tells Flask how to track logged-in users
     login_manager.init_app(app)
 
-    # This function is called automatically by Flask-Login whenever it needs to fetch a user from the database
+    # Flask-Login uses this to load the logged-in user from the session
     @login_manager.user_loader
     def load_user(user_id):
-        # Import User model (inside function to avoid circular imports)
+        # imported here to avoid a circular import
         from app.models import User
-        # Query database for the user with this ID, convert string to int
         return User.query.get(int(user_id))
 
     return app
