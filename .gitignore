@@ -6,6 +6,7 @@ venv/
 __pycache__/
 *.pyc
 instance/
+*.db
 
 # OS
 .DS_Store
@@ -13,11 +14,12 @@ instance/
 # IDE
 .vscode/
 .idea/
+.claude/
 
 # Coursework deliverables (not for the git history)
 docs/
 
-# Private study/session notes
+# Personal notes
 notes.md
 notes/
 204B-PROJECT-GUIDE.md
