@@ -6,6 +6,8 @@ A web app for students to register, log in and manage their daily tasks, with a 
 
 Live site: https://focus-task-manager-axbkb2dvcmepcghc.australiasoutheast-01.azurewebsites.net
 
+The live site deploys from the original private repository. GitHub Actions is turned off in this public copy.
+
 ## Tech stack
 
 - Python 3.14, Flask, Jinja templates
