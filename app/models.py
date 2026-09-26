@@ -14,7 +14,7 @@ class Task(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f'<Task {self.id}: {self.title}>' 
+        return f'<Task {self.id}: {self.title}>'
 
 
 class User(db.Model, UserMixin):
@@ -23,19 +23,12 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String, nullable=False)
 
     def set_password(self, plaintext):
-        # Use generate_password_hash() to hash plaintext
+        # only the hash is stored, never the plain password
         hashed = generate_password_hash(plaintext)
-        # Store result in self.password_hash
         self.password_hash = hashed
-        pass
-    
+
     def check_password(self, plaintext):
         return check_password_hash(self.password_hash, plaintext)
-        # Use check_password_hash() to verify plaintext against self.password_hash
-        # Return True or False
-        pass
-    
+
     def __repr__(self):
         return f'<User {self.id}: {self.email}>'
-
-   
