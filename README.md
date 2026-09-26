@@ -26,7 +26,7 @@ Live site: https://focus-task-manager-axbkb2dvcmepcghc.australiasoutheast-01.azu
    ```
    pip install -r requirements.txt
    ```
-3. Copy `.env.example` to `.env` and fill in both values. `SECRET_KEY` can be any random string. `DATABASE_URL` is a PostgreSQL URL, or `sqlite:///local-test.db` for a quick local database. Both are required: an empty value stops the app working.
+3. Copy `.env.example` to `.env` and fill in both values. `SECRET_KEY` can be any random string. `DATABASE_URL` is a PostgreSQL URL, or `sqlite:///local-test.db` for a quick local database. If either is missing, config.py falls back to a development key and a local SQLite file.
 4. Create the database tables:
    ```
    flask db upgrade
